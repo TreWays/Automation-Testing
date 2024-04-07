@@ -9,10 +9,17 @@ test('has title', async ({ page }) => {
 
   const emailinput = page.locator('#email');
   await expect (emailinput).toBeEditable();
-  await emailinput.fill('davis.tre13@yahoo.com');
-  await expect (emailinput).toHaveValue('davis.tre13@yahoo.com');
+  await emailinput.fill('cYo8faaaTCFS@tempsmtp.com');
+  await expect (emailinput).toHaveValue('cYo8faaaTCFS@tempsmtp.com');
 
   const retrievepassword = page.getByRole('button', {name: 'Retrieve Password'});
   await retrievepassword.click();
+
+  await page.goto('https://www.mailslurp.com/tools/fake-email-generator/?email=cYo8faaaTCFS%40tempsmtp.com');
+  const emailinputlink = page.locator('h2').first();
+  await expect(emailinputlink).toBeVisible({timeout: 30000});
+  await expect (emailinputlink).toContainText('noreply.practice@expandtesting.com');
+
+
 });
 
